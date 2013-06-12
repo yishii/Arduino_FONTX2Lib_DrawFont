@@ -1,3 +1,6 @@
+# table converter
+# coded by Yasuhiro ISHII,6/13/2013
+
 file = "JIS_X_0208.txt"
 
 table = Hash::new
