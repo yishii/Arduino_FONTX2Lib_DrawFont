@@ -40,6 +40,7 @@ typedef struct {
 extern unsigned char* GetFontPtr_Kanji(unsigned short );
 extern unsigned char* GetFontPtr_Ascii(unsigned char );
 extern void init_fontdrv(void);
+extern int get_fontGeometry(int* ,int* ,int* ,int* );
 
 
 #endif /* _FONTDRV_H_ */

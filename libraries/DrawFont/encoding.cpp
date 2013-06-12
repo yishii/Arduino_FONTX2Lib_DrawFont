@@ -1,3 +1,27 @@
+/*
+  Arduino FONTX2 drawing library DrawFont
+  https://github.com/yishii/Arduino_FONTX2Lib_DrawFont
+
+  Author : Yasuhiro ISHII
+  Date : 6/2/2013
+
+  This software is distributed under the license of Apache2.0
+
+
+
+
+  Special Thanks:
+
+  To convert from JIS to SJIS,referred to
+  http://c-program.sublimeblog.net/article/3164160.html
+  Thank you!
+
+  To convert from UTF16 to JIS,I used conversion chart from
+  http://hp.vector.co.jp/authors/VA010341/unicode/
+  Thank you!
+
+ */
+
 #include <stdio.h>
 
 const unsigned short utf16tojis[] = {
@@ -65595,7 +65619,26 @@ unsigned short econv_from_jis_to_sjis(unsigned short jis)
     return c1 * 0x100U + c2;
 }
 
-int econv_from_utf8_to_utf16(unsigned char* str,unsigned char* converted)
+unsigned short econv_from_utf8_to_utf16(unsigned char* utf8,int* len)
+{
+    unsigned short utf16;
+
+    if(*utf8 < 0x80){
+	utf16 = *utf8;
+	*len = 1;
+    } else {
+	utf16  = ((*(utf8++) & 0x0f) << 4) << 8;
+	utf16 |= ((*utf8 & 0x3c) >> 2) << 8;
+	utf16 |= ((*(utf8++) & 0x03) << 6);
+	utf16 |= (*(utf8++) & 0x3f);
+	*len = 3;
+    }
+
+    return(utf16);
+}
+
+#if 0
+int econv_from_utf8_to_utf16_string(unsigned char* str,unsigned char* converted)
 {
     int len = 0;
     while(*str != 0){
@@ -65612,52 +65655,6 @@ int econv_from_utf8_to_utf16(unsigned char* str,unsigned char* converted)
     }
 
     return(len);
-}
-
-#if 0
-int econv_from_utf16_to_jis(unsigned short from,unsigned short* to)
-{
-    *to = utf16tojis[from];
-    if(*to != 0){
-	return 1;
-    } else {
-	return 0;
-    }
-}
-#endif
-
-#if 0
-int main(void)
-{
-    unsigned char str[] = "123てすとABC";
-    int i;
-    int len;
-    unsigned short jiscode;
-    unsigned short sjiscode;
-    unsigned char converted[128] = {0};
-
-    printf("size = %ld\n",sizeof(utf16tojis));
-
-    printf("size = %d byte(s)\n",(int)sizeof(str));
-    
-    for(i=0;i<sizeof(str);i++){
-	printf("%02d : 0x%02X\n",i,str[i]);
-    }
-
-    len = econv_from_utf8_to_utf16(str,converted);
-    printf("result len = %d\n",len);
-    for(i=0;i<len;i+=2){
-	
-	//printf("%02d : %02X%02X => %04X => %04X\n",i,converted[i],converted[i+1],jiscode,sjiscode);
-
-	if(converted[i] == 0){
-	    // draw ANK converted[i+1]
-	} else {
-	    jiscode = utf16tojis[converted[i]<<8|converted[i+1]];
-	    sjiscode = jis2sjis(jiscode);
-	}	    
-
-    }
 }
 #endif
 

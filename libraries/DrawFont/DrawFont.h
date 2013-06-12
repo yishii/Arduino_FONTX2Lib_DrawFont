@@ -7,9 +7,11 @@
 #ifndef __DRAWSTRING_H__
 #define __DRAWSTRING_H__
 
+#include <stdbool.h>
+
 void drawFontInit(void);
-void drawFontString(unsigned char* str,int x,int y,int color);
-void drawFontKanji(unsigned short code,int x,int y,int color);
-void drawFontAscii(unsigned char code,int x,int y,int color);
+
+void drawFontString_SJIS(unsigned char* str,int x,int y,int color,int bgcolor,bool bg_color);
+int drawFontString_UTF8(unsigned char* str,int x,int y,int color,int bgcolor,bool bg_color);
 
 #endif /* __DRAWSTRING_H__ */

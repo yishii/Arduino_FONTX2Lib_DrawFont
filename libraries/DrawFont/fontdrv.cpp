@@ -70,6 +70,7 @@ void init_fontdrv(void);
 unsigned char* GetFontPtr_Ascii(unsigned char );
 unsigned char* GetFontPtr_Kanji(unsigned short );
 static int SearchFontAreaNo_Kanji(unsigned short );
+int get_fontGeometry(int* font_width_ascii,int* font_height_ascii,int* font_width_kanji,int* font_height_kanji);
 
 /*
   FONTX2 フォントドライバの初期化処理
@@ -89,6 +90,16 @@ void init_fontdrv(void){
 	usFontSearchTable_Kanji[i] = (FONT_BLOCK_E_KANJI(i-1) - FONT_BLOCK_S_KANJI(i-1) + 1) +
 	    usFontSearchTable_Kanji[i-1];
     }
+}
+
+int get_fontGeometry(int* font_width_ascii,int* font_height_ascii,int* font_width_kanji,int* font_height_kanji)
+{
+    *font_width_ascii = FONT_SIZE_X_ASCII;
+    *font_height_ascii = FONT_SIZE_Y_ASCII;
+    *font_width_kanji = FONT_SIZE_X_KANJI;
+    *font_height_kanji = FONT_SIZE_Y_KANJI;
+
+    return(1);
 }
 
 
