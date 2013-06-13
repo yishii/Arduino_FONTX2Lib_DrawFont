@@ -11,7 +11,7 @@ void setup() {
     drawFontString_UTF8((unsigned char*)"Arduino VGAライブラリと、自作日本語フォントライブラリのテスト",0,LINE_CONV(2),1,0,false);
     drawFontString_UTF8((unsigned char*)"=============================================================",0,LINE_CONV(3),1,0,false);
 
-    drawFontString_UTF8((unsigned char*)"本日は晴天なり。 ishii.yasuhiro@gmail.com",0,LINE_CONV(6),1,0,false);
+    drawFontString_UTF8((unsigned char*)"本日は晴天なり!!!  E-mail : ishii.yasuhiro@gmail.com",0,LINE_CONV(6),1,0,false);
     drawFontString_UTF8((unsigned char*)"日本語の漢字データは、FONTX2形式でROM内に保持しています。",0,LINE_CONV(7),1,0,false);
     drawFontString_UTF8((unsigned char*)"Arduino IDEのUTF-8を変換して表示しています。",0,LINE_CONV(8),1,0,false);
 }
